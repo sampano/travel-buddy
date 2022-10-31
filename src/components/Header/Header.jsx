@@ -1,4 +1,6 @@
 import * as React from "react";
+
+import { Autocomplete } from "@react-google-maps/api";
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Box, Toolbar, Typography, InputBase } from "@mui/material/";
 import SearchIcon from "@mui/icons-material/Search";
@@ -50,14 +52,14 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
             Travel Buddy
           </Typography>
-          <Box>
+          <Box display="flex">
             <Typography
               variant="h6"
               noWrap
@@ -66,16 +68,19 @@ export default function Header() {
             >
               Explore new places
             </Typography>
+
+            {/* <Autocomplete> */}
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            {/* </Autocomplete> */}
           </Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
         </Toolbar>
       </AppBar>
     </Box>
