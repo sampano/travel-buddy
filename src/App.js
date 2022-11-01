@@ -1,10 +1,31 @@
 import "./App.css";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
-import { Grid } from "@mui/material";
+import { Grid, useScrollTrigger } from "@mui/material";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
-
+import { getPlacesData } from "./api";
 const App = () => {
+  const [places, setPlaces] = useState([]);
+  const [coordinates, setCoordinates] = useState({});
+  const [bounds, setBounds] = useState(null);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      console.log("geolocation", coords.latitude, coords.longitude);
+      setCoordinates({ lat: coords.latitude, lng: coords.longitude });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (bounds) {
+      getPlacesData(bounds.sw, bounds.ne).then((data) => {
+        console.log("app bounds", bounds.sw);
+        console.log(data);
+        setPlaces(data);
+      });
+    }
+  }, [coordinates, bounds]);
   return (
     <>
       <Header />
@@ -31,12 +52,12 @@ const App = () => {
           }}
         >
           <Map
-          // setChildClicked={setChildClicked}
-          // setBounds={setBounds}
-          // setCoords={setCoords}
-          // coords={coords}
-          // places={filteredPlaces.length ? filteredPlaces : places}
-          // weatherData={weatherData}
+            setCoordinates={setCoordinates}
+            setBounds={setBounds}
+            coordinates={coordinates}
+            // coords={coords}
+            // places={filteredPlaces.length ? filteredPlaces : places}
+            // weatherData={weatherData}
           />
         </Grid>
       </Grid>
