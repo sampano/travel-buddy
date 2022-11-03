@@ -9,7 +9,9 @@ import {
   Grid,
 } from "@mui/material";
 import { useState } from "react";
-const List = () => {
+import PlaceDetails from "../PlaceDetails/PlaceDetails";
+
+const List = ({ places, childClicked }) => {
   const [type, setType] = useState("restaurant");
   const [rating, setRating] = useState("");
 
@@ -44,16 +46,13 @@ const List = () => {
           <MenuItem value={4.5}>Above 4.5</MenuItem>
         </Select>
       </FormControl>
-      <Grid container spacing={3}>
-        {/* {places?.map((place, i) => (
-          <Grid ref={elRefs[i]} key={i} item xs={12}>
-            <PlaceDetails
-              selected={Number(childClicked) === i}
-              refProp={elRefs[i]}
-              place={place}
-            />
+      <Grid container spacing={3} sx={{ height: "75vh", overflow: "auto" }}>
+        {/* {console.log("list", places)} */}
+        {places?.map((place, i) => (
+          <Grid key={i} item xs={12}>
+            <PlaceDetails place={place} />
           </Grid>
-        ))} */}
+        ))}
       </Grid>
     </Box>
   );
