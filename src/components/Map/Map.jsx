@@ -8,7 +8,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
   return (
     <Box sx={{ height: "85vh", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyC_H9s5yfg0OH2zW3LXNZ0Ouc0agxthzTs" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={coordinates}
         center={coordinates}
         defaultZoom={14}
