@@ -12,8 +12,9 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
-const PlaceDetails = ({ place }) => {
+const PlaceDetails = ({ place, selected, refProp }) => {
   // console.log("place details", place);
+
   return (
     <Card elevation={6}>
       <CardMedia
@@ -31,7 +32,9 @@ const PlaceDetails = ({ place }) => {
         </Typography>
 
         <Box display="flex" justifyContent="space-between" my={2}>
-          <Typography component="legend">Ratings</Typography>
+          <Typography component="legend">
+            {place.num_reviews} review{place.num_reviews > 1 && "s"}
+          </Typography>
           <Rating
             name="read-only"
             value={Number(place.rating)}

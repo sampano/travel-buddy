@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import { useState } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import { styled, alpha } from "@mui/material/styles";
 import { AppBar, Box, Toolbar, Typography, InputBase } from "@mui/material/";
@@ -46,7 +45,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-export default function Header() {
+export default function Header(setCoordinates) {
+  const [autocomplete, setAutocomplte] = useState(null);
+  const onload = (autoC) => setAutocomplte(autoC);
+  const onPlaceChange = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
+    setCoordinates({ lat, lng });
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -69,17 +75,17 @@ export default function Header() {
               Explore new places
             </Typography>
 
-            {/* <Autocomplete> */}
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            {/* </Autocomplete> */}
+            <Autocomplete onLoad={onload} onPLaceChanged={onPlaceChange}>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            </Autocomplete>
           </Box>
         </Toolbar>
       </AppBar>
