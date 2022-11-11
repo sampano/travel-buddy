@@ -6,7 +6,6 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Chip,
   Rating,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";

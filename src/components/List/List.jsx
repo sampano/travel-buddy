@@ -8,12 +8,11 @@ import {
   Select,
   Grid,
 } from "@mui/material";
-import { useState, useEffect, createRef } from "react";
+import { useState } from "react";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
 const List = ({ places, isLoading, type, setType, rating, setRating }) => {
   console.log("lisT", type);
-  const [elRefs, setElRefs] = useState([]);
 
   return (
     <Box sx={{ padding: "25px" }}>
