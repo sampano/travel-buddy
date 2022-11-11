@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
-import { Grid, useScrollTrigger } from "@mui/material";
+import { Grid } from "@mui/material";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
 import { getPlacesData } from "./api";
